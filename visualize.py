@@ -5,8 +5,6 @@ import matplotlib.pyplot as plt
 class FourierSeries():
     def __init__(self, safe_dict, time_interval, limit_n=50):
         self.limit_n = limit_n
-        self.an_cos = list
-        self.bn_sin = list
         self.time_interval = np.arange(time_interval[0], time_interval[1], 0.05)
         data = np.zeros((2, self.time_interval.shape[0]))
         data[1,:] = self.time_interval
