@@ -35,10 +35,6 @@ class FourierSeries():
     def find(self):
         a0, an, bn = self.get_input()
         for n in range(1,self.limit_n+1):
-            """
-            for t in range(self.time_interval.shape[0]):
-                self.data[0,t] = self.data[0,t] + self.evaluate_for_one(an, bn, n, self.time_interval[t])
-        """
             self.data[0] = self.data[0] + self.evaluate_for_one(an, bn, n, self.time_interval)
         self.data[0,:] = self.data[0,:] + float(a0)
         return self.data
