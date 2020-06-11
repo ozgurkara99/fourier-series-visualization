@@ -1,6 +1,5 @@
 from math import *
 import numpy as np
-import matplotlib.pyplot as plt
 import window
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
@@ -31,11 +30,19 @@ class FourierSeries(window.Window, QtWidgets.QMainWindow):
         self.a0 = float(self.edit_a0.text())
         self.mod_num = int(self.edit_mod.text())
         self.period = float(self.edit_period.text())
+        self.magnitude = np.zeros((2, self.limit_n))
+        self.magnitude[1,:] = np.arange(1, self.limit_n+1, 1)
+        self.theta = np.zeros((2, self.limit_n))
+        self.theta[1,:] = np.arange(1, self.limit_n+1, 1)
     
     def evaluate_for_one(self, an, bn, n, t):
         an, bn = self.function_evaluate(an, bn, n)
         first = an * np.array(list(map(lambda x: cos(n * (2*pi/self.period) * x), t)))  
         second = bn * np.array(list(map(lambda x: sin(n * (2*pi/self.period) * x), t)))
+        
+        self.magnitude[0,n-1] = sqrt(an**2 + bn**2)
+        self.theta[0,n-1] = np.arctan2(-1*bn, an) * 180/pi
+        
         return first + second
 
     def find_value(self):
@@ -49,11 +56,21 @@ class FourierSeries(window.Window, QtWidgets.QMainWindow):
     def update_graph(self):
         self.get_input()
         self.data = self.find_value()
-        self.MplWidget.canvas.axes.clear()
-        self.MplWidget.canvas.axes.plot(self.data[1,:], self.data[0,:])
-        self.MplWidget.canvas.axes.legend(('function'),loc='upper right')
-        self.MplWidget.canvas.axes.set_title('Fourier Series Visualization')
-        self.MplWidget.canvas.draw()    
+        self.plot_graph(self.data, "Fourier Series Visualization", self.MplWidget)
+        self.plot_stem(self.magnitude, "Magnitude", self.MplWidget2)
+        self.plot_stem(self.theta,  "Phase", self.MplWidget3)
+        
+    def plot_graph(self, data, name, MplWidget):
+        MplWidget.canvas.axes.clear()
+        MplWidget.canvas.axes.plot(data[1,:], data[0,:])
+        MplWidget.canvas.axes.set_title(name)
+        MplWidget.canvas.draw()      
+        
+    def plot_stem(self, data, name, MplWidget):
+        MplWidget.canvas.axes.clear()
+        MplWidget.canvas.axes.stem(data[1,:], data[0,:], use_line_collection=True)
+        MplWidget.canvas.axes.set_title(name)
+        MplWidget.canvas.draw()      
         
 safe_list = ['acos', 'asin', 'atan', 'atan2', 'ceil', 'cos', 
              'cosh', 'degrees', 'e', 'exp', 'fabs', 'floor', 
