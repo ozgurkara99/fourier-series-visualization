@@ -56,9 +56,9 @@ class FourierSeries(window.Window, QtWidgets.QMainWindow):
     def update_graph(self):
         self.get_input()
         self.data = self.find_value()
-        self.plot_graph(self.data, "Fourier Series Visualization", self.MplWidget)
-        self.plot_stem(self.magnitude, "Magnitude", self.MplWidget2)
-        self.plot_stem(self.theta,  "Phase", self.MplWidget3)
+        self.plot_graph(self.data, "Fourier Series Visualization", self.mpl_function)
+        self.plot_stem(self.magnitude, "Magnitude", self.mpl_magnitude)
+        self.plot_stem(self.theta,  "Phase", self.mpl_phase)
         
     def plot_graph(self, data, name, MplWidget):
         MplWidget.canvas.axes.clear()

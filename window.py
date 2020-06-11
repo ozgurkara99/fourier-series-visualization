@@ -17,17 +17,17 @@ class Window(object):
         self.button_exit.setGeometry(QtCore.QRect(340, 720, 100, 30))
         self.button_exit.setObjectName("button_exit")
         
-        self.MplWidget = MplWidget(self.centralwidget)
-        self.MplWidget.setGeometry(QtCore.QRect(40, 30, 560, 220))
-        self.MplWidget.setObjectName("MplWidget")
+        self.mpl_function = MplWidget(self.centralwidget)
+        self.mpl_function.setGeometry(QtCore.QRect(40, 30, 560, 220))
+        self.mpl_function.setObjectName("MplWidget")
         
-        self.MplWidget2 = MplWidget(self.centralwidget)
-        self.MplWidget2.setGeometry(QtCore.QRect(40, 250, 270, 220))
-        self.MplWidget2.setObjectName("MplWidget2")
+        self.mpl_magnitude = MplWidget(self.centralwidget)
+        self.mpl_magnitude.setGeometry(QtCore.QRect(40, 250, 270, 220))
+        self.mpl_magnitude.setObjectName("MplWidget2")
         
-        self.MplWidget3 = MplWidget(self.centralwidget)
-        self.MplWidget3.setGeometry(QtCore.QRect(330, 250, 270, 220))
-        self.MplWidget3.setObjectName("MplWidget3")
+        self.mpl_phase = MplWidget(self.centralwidget)
+        self.mpl_phase.setGeometry(QtCore.QRect(330, 250, 270, 220))
+        self.mpl_phase.setObjectName("MplWidget3")
         
         self.label_an = QtWidgets.QLabel(self.centralwidget)
         self.label_an.setGeometry(QtCore.QRect(125, 480, 30, 30))
